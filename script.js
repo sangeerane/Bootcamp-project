@@ -1,10 +1,17 @@
-function beforesubmit() {
-    let outputdate = document.querySelector(".outputdate");
+let captchachecked = false;
+
+function beforesubmit(event) {
+    if(captchachecked){
+        let outputdate = document.querySelector(".outputdate");
     let inputdate = document.querySelector(".inputdate");
     console.log(inputdate.value);
 
     let formatted = new Date(inputdate.value).toLocaleDateString("en-IN");
     outputdate.value = formatted;
+    }else{
+        alert("Please check the captcha before submit the lead!");
+        event.preventDefault();
+    }
 }
 
 function timestamp() 
@@ -17,3 +24,8 @@ function timestamp()
         } 
 } 
 setInterval(timestamp, 500); 
+
+
+function captchasuccess(){
+    captchachecked = true;
+}
